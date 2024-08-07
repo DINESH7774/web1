@@ -1,0 +1,53 @@
+a=imread('moon.tif');
+subplot(2,3,1);imshow(a)
+
+b=imnoise(a,'speckle',0.02);
+subplot(2,3,2);imshow(b);
+c=medfilt2(a);
+subplot(2,3,3);imshow(c);
+imshowpair(b,c,'montage');
+
+d=imnoise(a,'poison',0.03);
+subplot(2,3,4);imshow(d);
+e=medfilt2(a);
+subplot(2,3,5);imshow(e);
+imshowpair(d,e,'montage');
+
+f=imnoise(a,'poison',0.06);
+subplot(2,3,6);imshow(f);
+g=medfilt2(a);
+subplot(2,3,7);imshow(g);
+imshowpair(f,g,'montage');
+
+h=imnoise(a,'salt & pepper',0.02);
+subplot(2,3,8);imshow(h);
+i=medfilt2(a);
+subplot(2,3,9);imshow(i);
+imshowpair(h,i,'montage');
+
+
+
+1. Read an Input Image
+2. Defining a Blurr Filter
+3. Degrade the Image Quality by applying any filtering (eg Gaussian Blur, Motion Blur)
+4. Addition of Minimal Random Noise to the degraded Image (using randn)
+5. Computing DFT of Degraded Image
+Steps (fft2, fftshift, log of absolute value for display)
+6. Computing DFT of Filter (size equal to the image)
+Steps (increase the size of filter, ifftshift, fft2, fftshift, log of absolute value for display)
+7. Applying the REQUISITE METHOD FOR IMAGE RESTORATION
+8. Display the Restored Image in Spatial Domain
+
+
+
+a=imread('moon.tif');
+subplot(2,3,1);imshow(a)
+title('Original Image');
+
+b=imnoise(a,'salt & pepper',0.02);
+subplot(2,3,2);imshow(b);
+title('Noisy Image');
+
+c=medfilt2(b);
+subplot(2,3,3);imshowpair(b,c,'montage')
+title('Restoration Image');
